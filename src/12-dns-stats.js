@@ -24,7 +24,7 @@ function getDNSStats(domains) {
   const newArr = domains.reduce((prev, curr) => {
     const arr = curr.split('.').map((v) => `.${v}`);
     const arr2 = arr
-      .reverce()
+      .reverse()
       .reduce((prev1, curr1) => [...prev1, `${prev1[prev1.length - 1] || ''}${curr1}`], []);
     return [...prev, ...arr2];
   }, []);
