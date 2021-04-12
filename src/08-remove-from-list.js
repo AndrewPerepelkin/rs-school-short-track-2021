@@ -17,8 +17,33 @@
  * }
  */
 
-function removeKFromList(/* l, k */) {
-  throw new Error('Not implemented');
+const getCopyOfList = (l) => ({ ...l });
+
+let head = null;
+const getUpdatedList = (prevNode, list, k) => {
+  const l = list;
+  const prev = prevNode;
+  if (l === null) {
+    if (prev) {
+      return prev;
+    }
+    return null;
+  }
+  if (l.value === k) {
+    if (prev) {
+      prev.next = l.next;
+    } else {
+      head = l.next;
+    }
+    return getUpdatedList(prev, head, k);
+  }
+  return getUpdatedList(l, l.next, k);
+};
+
+function removeKFromList(l, k) {
+  const list = getCopyOfList(l);
+  getUpdatedList(null, list, k);
+  return head;
 }
 
 module.exports = removeKFromList;
